@@ -1,5 +1,5 @@
 # Builder is ubuntu-based because we need i386 libs
-FROM steamcmd/steamcmd:ubuntu-22 as builder
+FROM docker.io/steamcmd/steamcmd:ubuntu-22 as builder
 
 # Install prerequisites to download steamcmd
 RUN apt-get update \
@@ -116,7 +116,7 @@ COPY --from=builder /root/installer/linux32/libstdc++.so.6 /lib/
 RUN chown -R root:root /usr/bin/ /etc/ssl/certs /lib/ /usr/lib/
 
 RUN apt-get update \
-    && apt-get install -y wget unzip tmux bash libsdl2-2.0-0
+    && apt-get install -y wget unzip tmux bash libsdl2-2.0-0 libicu-dev
 
 RUN mkdir /data
 RUN mkdir /data/tModLoader
